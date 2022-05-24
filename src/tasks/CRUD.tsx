@@ -69,14 +69,12 @@ export function CRUD() {
       <button onClick={() => addPerson({ name, surname })}>Create</button>
       <button
         onClick={() => updatePerson({ name, surname, id: selectedId })}
-        disabled={selectedId === -1}
-      >
+        disabled={selectedId === -1}>
         Update
       </button>
       <button
         onClick={() => deletePerson(selectedId)}
-        disabled={selectedId === -1}
-      >
+        disabled={selectedId === -1}>
         Delete
       </button>
     </div>

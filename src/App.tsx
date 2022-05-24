@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react'
 import {
   Counter,
   TemperatureConverter,
@@ -7,40 +7,46 @@ import {
   CRUD,
   CircleDrawer,
   Cells
-} from "./tasks";
+} from './tasks'
 
 export function App() {
   return (
     <div>
       <h1>7 GUIs tasks</h1>
       <p>
-        Reference:{" "}
+        Reference:{' '}
         <a
           href="https://eugenkiss.github.io/7guis/tasks"
           target="_blank"
-          rel="noopener noreferrer"
-        >
+          rel="noopener noreferrer">
           https://eugenkiss.github.io/7guis/tasks
         </a>
       </p>
       <p>
-        HackerNews source:{" "}
+        HackerNews source:{' '}
         <a
           href="https://news.ycombinator.com/item?id=31273802"
           target="_blank"
-          rel="noopener noreferrer"
-        >
+          rel="noopener noreferrer">
           https://news.ycombinator.com/item?id=31273802
         </a>
       </p>
       <p>
-        Vanilla JS implementation:{" "}
+        Vanilla JS implementation:{' '}
         <a
-          href="https://codesandbox.io/s/7guis-tasks-js-z3oesm"
+          href="https://codesandbox.io/s/7guis-tasks-js-kjunj2"
           target="_blank"
-          rel="noopener noreferrer"
-        >
-          https://codesandbox.io/s/7guis-tasks-js-z3oesm
+          rel="noopener noreferrer">
+          https://codesandbox.io/s/7guis-tasks-js-kjunj2
+        </a>
+      </p>
+      <p>
+        Solid JS implementation:{' '}
+        <a
+          href="https://codesandbox.io/s/7guis-tasks-solid-j99utk"
+          target="_blank"
+          rel="noopener noreferrer">
+          https://codesandbox.io/s/7guis-tasks-solid-j99utk
         </a>
       </p>
       <div>
@@ -60,5 +66,5 @@ export function App() {
         <Cells />
       </div>
     </div>
-  );
+  )
 }

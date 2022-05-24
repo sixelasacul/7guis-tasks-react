@@ -98,8 +98,7 @@ function Circle({
         borderRadius: width + 'px'
       }}
       role="button"
-      onClick={onClick}
-    ></div>
+      onClick={onClick}></div>
   )
 }
 
@@ -162,8 +161,7 @@ export function CircleDrawer() {
           height: '8rem',
           position: 'relative'
         }}
-        onClick={addCircle}
-      >
+        onClick={addCircle}>
         {circles
           .filter((c) => c.id !== selectedCircle?.id)
           .concat(selectedCircle ?? [])
@@ -190,8 +188,7 @@ export function CircleDrawer() {
             justifyContent: 'center',
             backgroundColor: 'white',
             border: '1px solid black'
-          }}
-        >
+          }}>
           <div>
             <p>Adjust diameter of circle at {selectedCirclePosition}.</p>
             <input
@@ -217,8 +214,7 @@ export function CircleDrawer() {
                   editCircle(current)
                   return null
                 })
-              }}
-            >
+              }}>
               Ok
             </button>
           </div>

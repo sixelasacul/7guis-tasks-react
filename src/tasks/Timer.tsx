@@ -40,8 +40,7 @@ export function Timer() {
       <button
         onClick={() => {
           setEllapsedTime(0)
-        }}
-      >
+        }}>
         Reset
       </button>
     </div>

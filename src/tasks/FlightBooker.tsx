@@ -68,8 +68,7 @@ export function FlightBooker() {
     <div>
       <select
         onChange={(e) => setReturnFlight(e.target.value === 'return')}
-        defaultValue="one-way"
-      >
+        defaultValue="one-way">
         <option value="one-way">one-way flight</option>
         <option value="return">return flight</option>
       </select>
@@ -93,8 +92,7 @@ export function FlightBooker() {
           window.alert(
             `Your flight is booked for ${startDate}${returnMessage}.`
           )
-        }}
-      >
+        }}>
         Book
       </button>
     </div>
