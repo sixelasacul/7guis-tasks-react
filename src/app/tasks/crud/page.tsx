@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 
 interface Person {
@@ -8,7 +10,7 @@ interface IdentifiedPerson extends Person {
   id: number
 }
 
-export function CRUD() {
+export default function CRUD() {
   const [persons, setPersons] = React.useState<IdentifiedPerson[]>([])
   const [selectedId, setSelectedId] = React.useState(-1)
   const [name, setName] = React.useState('')

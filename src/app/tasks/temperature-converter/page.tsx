@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 
 function isNumber(value: string | number): value is number {
@@ -31,7 +33,7 @@ function Temperature({
   )
 }
 
-export function TemperatureConverter() {
+export default function TemperatureConverter() {
   const [celsius, setCelsius] = React.useState('')
   const [farenheit, setFarenheit] = React.useState('')
 

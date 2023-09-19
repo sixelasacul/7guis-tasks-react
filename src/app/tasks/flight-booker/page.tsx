@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 
 const DATE_FORMAT_REX = /^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.([0-9]{4})$/
@@ -45,7 +47,7 @@ function DatePicker({
 }
 
 const defaultDate = getDefaultDate()
-export function FlightBooker() {
+export default function FlightBooker() {
   const [isReturnFlight, setReturnFlight] = React.useState(false)
   const [startDate, setStartDate] = React.useState(defaultDate)
   const [endDate, setEndDate] = React.useState(defaultDate)

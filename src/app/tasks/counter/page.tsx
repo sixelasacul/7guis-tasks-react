@@ -1,6 +1,8 @@
+'use client'
+
 import * as React from 'react'
 
-export function Counter() {
+export default function Counter() {
   const [counter, setCounter] = React.useState(0)
 
   return (

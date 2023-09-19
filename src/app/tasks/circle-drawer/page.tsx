@@ -1,5 +1,7 @@
+'use client'
+
 import * as React from 'react'
-import './CircleDrawer.css'
+import styles from './styles.module.css'
 
 interface CircleObject {
   x: number
@@ -87,7 +89,7 @@ function Circle({
   const width = radius * 2
   return (
     <div
-      className="circle"
+      className={styles.circle}
       style={{
         position: 'absolute',
         top: y - radius,
@@ -103,7 +105,7 @@ function Circle({
 }
 
 const DEFAULT_RADIUS = 10
-export function CircleDrawer() {
+export default function CircleDrawer() {
   const [
     circles,
     setCircles,

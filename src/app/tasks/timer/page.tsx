@@ -1,6 +1,8 @@
+'use client'
+
 import * as React from 'react'
 
-export function Timer() {
+export default function Timer() {
   // all variables are in seconds
   const [duration, setDuration] = React.useState(0)
   const [ellapsedTime, setEllapsedTime] = React.useState(0)

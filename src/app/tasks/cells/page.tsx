@@ -1,5 +1,7 @@
+'use client'
+
 import * as React from 'react'
-import './Cells.css'
+import style from './styles.module.css'
 
 const ASCII_OFFSET = 65
 const COL_NAMES = Array.from({ length: 26 }).map((_, i) =>
@@ -38,7 +40,8 @@ function Cell({
   )
 }
 
-export function Cells() {
+// To be thought again, following https://github.com/sixelasacul/7guis-tasks-svelte/blob/main/src/routes/tasks/cells/%2Bpage.svelte
+export default function Cells() {
   const [grid, setGrid] = React.useState(CELLS_GRID)
 
   function updateCell(rowId: number, cellId: number, value: string | number) {
