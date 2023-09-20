@@ -1,91 +1,78 @@
 'use client'
 
 import * as React from 'react'
+import { Cell } from './Cell'
 import style from './styles.module.css'
 
 const ASCII_OFFSET = 65
-const COL_NAMES = Array.from({ length: 26 }).map((_, i) =>
+const ROW_RANGE = 100
+const COLUMNS = Array.from({ length: 26 }).map((_, i) =>
   String.fromCharCode(i + ASCII_OFFSET)
 )
-const ROW_RANGE = 100
-const CELLS_GRID = Array<(string | number)[]>(ROW_RANGE).fill(
-  Array<string>(COL_NAMES.length).fill('')
-)
+const ROWS = Array.from({ length: ROW_RANGE }).map((_, i) => i)
+const prefill: readonly (readonly [string, string])[] = COLUMNS.flatMap((c, i) => ROWS.map((r) => `${c}${r}`).map((k, j) => [k, (i+100*j).toString()]))
 
-function isFormula(value: string | number): value is string {
-  return String(value).startsWith('=')
-}
-function parseDependencies(formula: string) {
-  const result = formula.match(/([A-Z][-0-9])/g)
-  return result
-}
-function convertCellToArrayItem(cell: string) {
-  return [cell.charCodeAt(0), Number(cell[1])]
-}
-
-function Cell({
-  value = '',
-  onBlur
-}: {
-  value: string | number
-  onBlur?(value: string | number): void
-}) {
-  const [localValue, setLocalValue] = React.useState(value)
-  return (
-    <input
-      value={localValue}
-      onChange={(e) => setLocalValue(e.target.value)}
-      onBlur={() => onBlur?.(localValue)}
-    />
-  )
-}
-
-// To be thought again, following https://github.com/sixelasacul/7guis-tasks-svelte/blob/main/src/routes/tasks/cells/%2Bpage.svelte
 export default function Cells() {
-  const [grid, setGrid] = React.useState(CELLS_GRID)
+  const [formulas, setFormulas] = React.useState(new Map<string, string>(prefill))
+  const [results, setResults] = React.useState(new Map<string, string>())
 
-  function updateCell(rowId: number, cellId: number, value: string | number) {
-    if (isFormula(value)) {
+  function computeResults(_formulas = formulas) {
+    console.time('update')
+    const newResults = new Map(results)
+    for (const [key, formula] of _formulas) {
+      if (formula.startsWith('=')) {
+        const parsedFormula = formula.substring(1).replace(/[A-Z]\d{1,2}/g, (match) => results.get(match) ?? '')
+        newResults.set(key, eval(parsedFormula.trim()))
+      } else {
+        newResults.set(key, formula)
+      }
     }
-    setGrid((currentGrid) => {
-      return currentGrid.map((row, localRowId) => {
-        return row.map((cell, localCellId) => {
-          if (localRowId === rowId && localCellId === cellId) {
-            return value
-          }
-          return cell
-        })
-      })
-    })
+    setResults(newResults)
+    console.timeEnd('update')
   }
 
+  function updateCell(key: string, value: string) {
+    const nextFormulas = new Map(formulas)
+    nextFormulas.set(key, value)
+
+    setFormulas(nextFormulas)
+    computeResults(nextFormulas)
+  }
+
+  React.useEffect(() => {
+    computeResults()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
-    <div>
       <table>
         <thead>
           <tr>
-            <th> </th>
-            {COL_NAMES.map((col) => (
+            <th>\</th>
+            {COLUMNS.map((col) => (
               <th key={col}>{col}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {grid.map((row, rowId) => (
-            <tr key={rowId}>
-              <td>{rowId + 1}</td>
-              {row.map((cell, cellId) => (
-                <td key={cellId}>
-                  <Cell
-                    value={cell}
-                    onBlur={(value) => updateCell(rowId, cellId, value)}
-                  />
-                </td>
-              ))}
+          {ROWS.map((row) => (
+            <tr key={row}>
+              <td>{row}</td>
+              {COLUMNS.map((cell) => {
+                const key = `${cell}${row}`
+                return (
+                  <td key={key}>
+                    <Cell
+                      formula={formulas.get(key) ?? ''}
+                      result={results.get(key) ?? ''}
+                      onUpdate={(value) => updateCell(key, value)}
+                    />
+                  </td>
+                )
+              })}
             </tr>
           ))}
         </tbody>
       </table>
-    </div>
   )
 }
