@@ -6,7 +6,7 @@ Useful links: [7GUIs reference](https://eugenkiss.github.io/7guis/tasks) | [Hack
 
 Check out my other implementations:
 
-- [7guis-tasks-react](https://github.com/sixelasacul/7guis-tasks-react)
+- [7guis-tasks-svelte](https://github.com/sixelasacul/7guis-tasks-svelte)
 - [7guis-tasks-solid](https://github.com/sixelasacul/7guis-tasks-solid)
 - [7guis-tasks-js](https://github.com/sixelasacul/7guis-tasks-js)
 
